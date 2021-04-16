@@ -17,7 +17,7 @@ export default function Feedback(props) {
               <CircularProgress />
               :
               <>
-                {data.message}
+                {data.msg}
               </>
             }
           </DialogContentText>
