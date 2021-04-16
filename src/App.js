@@ -7,6 +7,8 @@ import useStyles from './styles.js';
 import Feedback from './Feedback.js'
 import CustomInput from './CustomInput.js';
 
+const img = require("./Logo.png");
+
 export default function App() {
   const classes = useStyles();
 
@@ -25,7 +27,7 @@ export default function App() {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id})
+      body: JSON.stringify({ id })
     });
     const json = await response.json();
     console.log(json)
@@ -56,8 +58,8 @@ export default function App() {
     if (!handleCheckError()) {
       setOpen(true);
       await fetchData();
-      setId('');;  
-      window.scrollTo(0,0);   
+      setId('');;
+      window.scrollTo(0, 0);
     }
 
   }
@@ -65,18 +67,23 @@ export default function App() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <div style={{ background: '#008272', display: 'block', padding: '50px', fontSize: '38px', }}>
-
-          <div style={{ color: 'white' }}>
+        <div style={{ background: '#000', display: 'flex', padding: '50px', fontSize: '38px', }}>
+          <div style={{ color: 'white', fontSize: "0.75em" }}>
             Entrega de Máscaras
+          </div>
+          <div style={{ margin: "0 0 0 auto" }}>
+            <img src={img} style={{width: "1.5em"}} alt="7labs logo" />
           </div>
         </div>
         <div style={{ display: 'block', padding: '10%' }}>
-          <CustomInput erro={idError} label={"ID"} questao={"1. Qual o seu ID?"} value={id} set={setId} mensagemErro={errorMessage} />
-          <div style={{ marginTop: "5%" }}>
-            <Button variant="contained" type="submit" color="primary" style={{ color: "white", backgroundColor: "rgb(0, 130, 114)" }} onClick={handleSubmit}>Enviar</Button>
-            <Feedback handleClose={() => {setOpen(false); setData(undefined)}} open={open} data={data} />
-          </div>
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+
+            <CustomInput erro={idError} label={"ID"} questao={"1. Qual o seu ID?"} value={id} set={setId} mensagemErro={errorMessage} />
+            <div style={{ marginTop: "5%" }}>
+              <Button variant="contained" type="submit" color="primary" style={{ color: "white", backgroundColor: "rgb(0, 0, 0)" }} onClick={handleSubmit}>Enviar</Button>
+              <Feedback handleClose={() => { setOpen(false); setData(undefined) }} open={open} data={data} />
+            </div>
+          </form>
         </div>
       </Paper>
     </div>
